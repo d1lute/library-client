@@ -15,11 +15,35 @@
     		<artifactId>epublib-core</artifactId>
     		<version>3.1</version>
 		</dependency>
+		<dependency>
+        	<groupId>org.openjfx</groupId>
+        	<artifactId>javafx-controls</artifactId>
+        	<version>15</version>
+    	</dependency>
+    	<dependency>
+        	<groupId>org.openjfx</groupId>
+        	<artifactId>javafx-fxml</artifactId>
+        	<version>15</version>
+    	</dependency>
+    	<dependency>
+        	<groupId>org.openjfx</groupId>
+        	<artifactId>javafx-swing</artifactId>
+        	<version>15</version>
+    	</dependency>
+    	<dependency>
+        	<groupId>org.openjfx</groupId>
+        	<artifactId>javafx-web</artifactId>
+       		<version>15</version>
+    	</dependency>
 
 
-		
 
-	</dependencies>
+    	<dependency>
+    		<groupId>com.final</groupId>
+    		<artifactId>library</artifactId>
+    		<version>0.0.1-SNAPSHOT</version>
+    	</dependency>
+  </dependencies>
   <build>
     <sourceDirectory>src</sourceDirectory>
     <plugins>
