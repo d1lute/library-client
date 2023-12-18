@@ -10,6 +10,7 @@
     </repository>
   </repositories>
   <dependencies>
+	  	
 		<dependency>
     		<groupId>com.positiondev.epublib</groupId>
     		<artifactId>epublib-core</artifactId>
@@ -35,14 +36,13 @@
         	<artifactId>javafx-web</artifactId>
        		<version>15</version>
     	</dependency>
-
-
-
     	<dependency>
-    		<groupId>com.final</groupId>
-    		<artifactId>library</artifactId>
-    		<version>0.0.1-SNAPSHOT</version>
-    	</dependency>
+		    <groupId>org.json</groupId>
+		    <artifactId>json</artifactId>
+		    <version>20210307</version> <!-- 或者是其他适合的版本 -->
+		</dependency>
+
+
   </dependencies>
   <build>
     <sourceDirectory>src</sourceDirectory>

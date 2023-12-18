@@ -1,35 +1,36 @@
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.net.HttpURLConnection;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
-public class RegistrationFrame extends JFrame {
+public class AddAdmin extends JFrame {
     private JTextField usernameField;
     private JPasswordField passwordField;
     private JPasswordField confirmPasswordField;
     private JTextField emailField;
     private JButton registerButton;
-    private final LoginFrame loginFrame;
     private JLabel emailErrorLabel;
     private JLabel passwordErrorLabel;
 
-    public RegistrationFrame(LoginFrame loginFrame) {
-        this.loginFrame = loginFrame;
+    public AddAdmin() {
         createUI();
     }  
 
     private void createUI() {
         setTitle("Sign Up");
         setSize(300, 200);
-        setLocationRelativeTo(loginFrame); // Position relative to the login frame
         setLayout(new GridLayout(7, 2, 5, 5));
 
         usernameField = new JTextField();
@@ -58,32 +59,33 @@ public class RegistrationFrame extends JFrame {
         add(confirmPasswordField);
         add(new JLabel("Email:"));
         add(emailField);
-        add(emailErrorLabel); // Add error labels to the layout
+        add(emailErrorLabel); 
         add(passwordErrorLabel);
         add(new JLabel()); // Placeholder
         add(registerButton);
     }
 
     private void registerAction(ActionEvent event) {
+        
     	String username = usernameField.getText();
         String password = new String(passwordField.getPassword());
         String confirmPassword = new String(confirmPasswordField.getPassword());
         String email = emailField.getText();
 
         if (!isEmailValid(email)) {
-        	emailErrorLabel.setVisible(true); // Display error message.
+        	emailErrorLabel.setVisible(true); // Display error message
             getContentPane().revalidate();
             getContentPane().repaint();
         } else {
-            emailErrorLabel.setVisible(false); 
+            emailErrorLabel.setVisible(false); // Hide error message."
             if (password.equals(confirmPassword)) {
             	passwordErrorLabel.setVisible(false);
             	 // Assuming successful registration, populate the information in the login field.
-                loginFrame.setUsernameAndPassword(usernameField.getText(), new String(passwordField.getPassword()));
+               
                 
                 
                 try {
-                    URL url = new URL("http://localhost:8080/register");
+                    URL url = new URL("http://localhost:8080/addAdmin");
                     HttpURLConnection con = (HttpURLConnection) url.openConnection();
                     con.setRequestMethod("POST");
                     con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
@@ -101,7 +103,7 @@ public class RegistrationFrame extends JFrame {
 
                     int responseCode = con.getResponseCode();
                     if (responseCode == HttpURLConnection.HTTP_OK) {
-                        // Handle the server response.
+                        // Handle the server response
                     } else {
                         // Handle errors.
                     }
@@ -116,7 +118,8 @@ public class RegistrationFrame extends JFrame {
                 // ...
             } else {
             	passwordErrorLabel.setVisible(true);
-                // Handle the case where passwords do not match
+                // Handle the case where the passwords do not match."
+
                 // ...
             }
         }
@@ -145,4 +148,3 @@ public class RegistrationFrame extends JFrame {
         return matcher.matches();
     }
 }
-

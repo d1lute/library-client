@@ -79,10 +79,10 @@ public class LoginFrame extends JFrame {
         String password = new String(passwordField.getPassword());
         boolean isAdmin = adminButton.isSelected();
         String userType = isAdmin ? "admin" : "user";
-        String loginUrl = "http://localhost:8080/login/" + userType; // 根据用户类型调整URL
+        String loginUrl = "http://localhost:8080/login/" + userType; // Adjust the URL based on user type.
         System.out.println(loginUrl);
         try {
-        	URL url = new URL(loginUrl); // 修改为您的服务器登录URL
+        	URL url = new URL(loginUrl); 
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             
             con.setRequestMethod("POST");
@@ -99,17 +99,17 @@ public class LoginFrame extends JFrame {
 
             int responseCode = con.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_OK) {
-                // 登录成功，关闭登录界面并打开用户界面
+                // On successful login, close the login window and open the user interface.
                 SwingUtilities.invokeLater(() -> {
-                    dispose(); // 关闭登录界面
+                    dispose(); // Close the login window.
                     if (isAdmin) {
-                        new AdminFrame().setVisible(true); // 打开管理员界面
+                        new AdminFrame().setVisible(true); // Open the admin interface.
                     } else {
-                        new UserFrame().setVisible(true); // 打开普通用户界面
+                        new UserFrame(username).setVisible(true); // Open the regular user interface.
                     }
                 });
             } else {
-                // 登录失败，显示错误消息
+                // On login failure, display an error message.
                 JOptionPane.showMessageDialog(this, "Login failed: Invalid username or password", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } catch (IOException ex) {
@@ -130,4 +130,8 @@ public class LoginFrame extends JFrame {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new LoginFrame().setVisible(true));
     }
+    
+    
+    
+  
 }
